@@ -1,3 +1,5 @@
+http://www.insta.appicure.com/
+
 1. Insta gallery is a SPWA(single page web application) created using OOJS, backbone.JS and the Instagram API  
 
 2. It has bookmarkable url's and deep-linking courtesy of backbone routers.
