@@ -1,0 +1,131 @@
+<!-- basic user template -->
+<script type="text/template" id="basic-user-template">
+ <a href="#/userdetails/<%= id %>"><img src="<%= images.low_resolution.url %>" /> </a> 
+</script>
+
+<!-- user location template -->
+<script type="text/template" id="location-user-template">
+ <a href="#/user/<%= id %>"><h3><%= name %> </h3></a> 
+</script>
+
+
+<!-- basic user template with captions rollover-->
+ <script type="text/template" id="caption-user-tmpl">
+ <!-- wrapper div -->  
+<div class='wrapper'>  
+    <!-- image -->  
+     <a href="#/mediadetail/<%= id %>"><img src="<%= images.low_resolution.url %>" /> </a> 
+    <!-- description div -->  
+    <div class='description'>  
+        <!-- description content -->  
+        <div class='description_content'><% if (caption != null) { %> <%= caption.text %> <% } else {%> <%= user.full_name %> <%}%></div>  
+        <!-- end description content -->  
+    </div>  
+    <!-- end description div -->  
+</div>  
+<!-- end wrapper div -->  
+</script>
+
+
+<!-- basic user search template-->
+ <script type="text/template" id="search-user-tmpl"> 
+    <!-- image -->  
+	<h3><%= full_name %></h3>
+     <a href="#/user/<%= id %>"><img src="<%= profile_picture %>" /> </a>   
+</script>
+
+<!-- current user template-->
+<script type="text/template" id="current-user-template">
+<div style="background-image: url('<%= profile_picture %>')" id="userImage"></div>
+<a id="username" href="/#/user/<%= id %>"><%= username %></a>
+<span class="buttons" id="userInfo"><a href="#" id="photosLink" alt="photos"><strong><%= counts.media %></strong> Photos</a> <a href="#" id="followersLink" alt="photos"><strong><%= counts.followed_by %></strong> Follower</a> <a href="#" id="followingLink" alt="photos"><strong><%= counts.follows %></strong> Following</a></span>
+</script>
+
+
+<!--Default menu template -->
+<script type="text/template" id="default-menu-tmpl">
+<div class="buttons">
+<a title="Popular Media" alt="Popular Media" class="simplebutton" href="#/popular/" id="popularLink"><span class="image"></span><span class="text">Popular</span></a>
+<a class="simplebutton noicon" href="https://instagram.com/oauth/authorize/?client_id=f5c6a010c64440e1bbd1fba3082581af&redirect_uri=http%3A%2F%2Flocalhost%2F~ptutty%2Finsta-gallery%2F&response_type=token"><span class="text">Log in</span></a>
+</div>
+</script>
+
+<!-- full menu template -->
+<script type="text/template" id="auth-menu-tmpl">
+<div class="buttons">
+	<a alt="My Feed" title="My Feed" class="simplebutton" href="#/feed/" id="feedLink"><span class="image"></span><span class="text">Feed</span></a>
+<a alt="My Photos" title="My Photos" class="simplebutton" href="#/myphotos/" id="meLink"><span class="image"></span><span class="text">My Photos</span></a>
+<a title="Popular Media" alt="Popular Media" class="simplebutton" href="#/popular/" id="popularLink"><span class="image"></span><span class="text">Popular</span></a>
+<a class="simplebutton noicon" id="logout" href="#"><span class="text">Log out</span></a>
+<div id="searchchoice">
+<input name="searchtype" type="radio" checked value="tag"><label>Tag</label>
+<input name="searchtype" type="radio" value="user"><label>User</label>
+<input name="searchtype" type="radio" value="location"><label>Location</label>
+</div>
+<div id="searchBox">
+<span><input type="text" id="search" placeholder=" search by" value=""></span>
+<a class="simplebutton" id="searchButton" href="javascript:void(0);"><span>&nbsp;</span></a>
+</div>
+</div>
+</script>
+
+
+
+<!-- detailed view tmpl-->
+ <script type="text/template" id="media-detail-template">
+
+<!-- #main content and sidebar area -->
+   
+      <aside id="sidebar1"><!-- sidebar1 -->
+      <h2 class="fontface" id="username"><a href="#/user/<%= user.id %>" ><%= user.full_name %></a></h2> <!-- Title of Page -->
+      <br><br><br>
+      <img src="<%= user.profile_picture %>" /><br />
+	  <h2>Location:<%= App.insta.settings.address %></h2><br> 
+	  
+	  </p>
+      </aside><!-- end of sidebar1 -->
+
+      <section id="content"><!-- #content -->
+         <article>
+         	<a href="<%= link %>" target="_blank"><img width="470px" src="<%= images.standard_resolution.url %>" /></a>
+         </article>
+
+         <article>
+
+         	<p><% if (caption != null ) { caption.text } %></p>
+         </article>
+
+      </section><!-- end of #content -->
+
+      <aside id="sidebar2"><!-- sidebar2 -->
+
+         <h3 class="fontface">Likes <%= likes.count %></h3><br>
+		 <ul>
+        <% _.each(likes.data, function(data) { %>
+         <li><%= data.full_name %></li>
+        <% }); %>
+		 </ul>
+    
+        
+
+         <h3 class="fontface">Comments</h3><br>
+         <ul>
+ 		 <% _.each(comments.data, function(data) { %>
+         <li><%= data.text %></li>
+        <% }); %>
+         </ul>
+		 
+		 
+		 <h3 class="fontface">Likes: <%= likes.count %></h3><br>
+		 <h3 class="fontface">Creation Date: <%= App.Helpers.timeConverter(created_time) %></h3><br>
+		 <h3 class="fontface">Filter: <%= filter %></h3><br>
+		 
+		 
+      </aside><!-- end of sidebar -->
+
+</script>
+
+
+
+
+
