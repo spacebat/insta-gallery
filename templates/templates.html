@@ -46,7 +46,7 @@
 <script type="text/template" id="default-menu-tmpl">
 <div class="buttons">
 <a title="Popular Media" alt="Popular Media" class="simplebutton" href="#/popular/" id="popularLink"><span class="image"></span><span class="text">Popular</span></a>
-<a class="simplebutton noicon" href="https://instagram.com/oauth/authorize/?client_id=f5c6a010c64440e1bbd1fba3082581af&redirect_uri=http%3A%2F%2Flocalhost%2F~ptutty%2Finsta-gallery%2F&response_type=token"><span class="text">Log in</span></a>
+<a class="simplebutton noicon" href="https://instagram.com/oauth/authorize/?client_id=865ab5fa377f4793bf7dcbb215758668&redirect_uri=http%3A%2F%2Flocalhost%2F~ptutty%2Finsta-gallery%2F&response_type=token"><span class="text">Login via Instagram</span></a>
 </div>
 </script>
 
@@ -55,8 +55,9 @@
 <div class="buttons">
 	<a alt="My Feed" title="My Feed" class="simplebutton" href="#/feed/" id="feedLink"><span class="image"></span><span class="text">Feed</span></a>
 <a alt="My Photos" title="My Photos" class="simplebutton" href="#/myphotos/" id="meLink"><span class="image"></span><span class="text">My Photos</span></a>
+<a alt="My Liked" title="My Liked" class="simplebutton" href="#/myliked/" id="likesLink"><span class="image"></span><span class="text">My Liked</span></a>
 <a title="Popular Media" alt="Popular Media" class="simplebutton" href="#/popular/" id="popularLink"><span class="image"></span><span class="text">Popular</span></a>
-<a class="simplebutton noicon" id="logout" href="#"><span class="text">Log out</span></a>
+<a class="simplebutton noicon" id="logout" href=""><span class="text">Log out</span></a>
 <div id="searchchoice">
 <input name="searchtype" type="radio" checked value="tag"><label>Tag</label>
 <input name="searchtype" type="radio" value="user"><label>User</label>
@@ -80,7 +81,7 @@
       <h2 class="fontface" id="username"><a href="#/user/<%= user.id %>" ><%= user.full_name %></a></h2> <!-- Title of Page -->
       <br><br><br>
       <img src="<%= user.profile_picture %>" /><br />
-	  <h2>Location:<%= App.insta.settings.address %></h2><br> 
+	  <h2>Location:<%= App.settings.address %></h2><br> 
 	  
 	  </p>
       </aside><!-- end of sidebar1 -->

@@ -105,6 +105,18 @@ App.Main = {
 					 	});
 				break;	
 				
+				case "users/self/media/liked": // for requests /users/self/media/liked
+						App.collections.userliked = new App.Collections.Users([],{query: endpoint + "?"}); 
+						App.collections.userliked.fetch({success: function(users, response){
+							App.views.userliked = new App.Views.UserDisplay({collection: App.collections.userliked});
+						}
+					 	});
+						
+						$("#likesLink").addClass("active");
+				break;	
+				
+				
+				
 				
 			
 		}

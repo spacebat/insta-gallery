@@ -7,42 +7,41 @@
 
 
 
-/* ###### top level controller class - pulls in everything else.  #########*/
+/* ###### top level view */
+// checks cookies on page load
+// checks login status on render call.
+//   
 
 App.Views.InstaView = Backbone.View.extend({ 
 	initialize: function() {
+		console.log("initialize app");
 			this.cookiecheck();
-			this.router = new App.Routers.Routes();
 	},
 	
-	render: function(){
-		if (App.insta.settings.accesstoken){
-			this.header = new App.Views.MenuAuth(); // see /js/views/menu.js
-			if (!App.views.currentuser){
-				App.Main.display("users/self");
+	
+	render: function(){ // logged in
+		if (App.settings.accesstoken){
+			
+			if (!this.header_auth) {
+				this.header_auth = new App.Views.MenuAuth(); // show full menu
 			}
-			App.insta.router.navigate("/feed/", {trigger: true});
+			return true;
 			
-		} else {
-			this.header = new App.Views.MenuDefault();
-			// display popular photos if not logged in
-			App.insta.router.navigate("/popular/", {trigger: true});
-			
-		}; 
+		} else { // not logged in
 		
-		 
+			console.log("not logged in");
+			if (!this.header_noauth) {
+				this.header_noauth = new App.Views.MenuDefault(); // display log in menu
+			}
+				return false;
+			}; 
 		
-	},
-	
-	settings: {
-		// clientid: 'f5c6a010c64440e1bbd1fba3082581af' // insta.mungopod.com
-		clientid: '865ab5fa377f4793bf7dcbb215758668' // localhost
 	},
 	
 	cookiecheck: function(){
 		var accesstoken = App.Helpers.readCookie('access_token');
 		if (accesstoken){
-			this.settings.accesstoken = accesstoken;	
+			App.settings.accesstoken = accesstoken;	
 		}
 	}
 	

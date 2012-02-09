@@ -1,4 +1,3 @@
-(function($){
 
 // app structure
 window.App = {};
@@ -12,6 +11,9 @@ App.Routers = {};
 App.collections = {};
 App.views = {};
 
+
+// misc
+App.settings = {clientid:'865ab5fa377f4793bf7dcbb215758668'};
 
 
 
@@ -80,7 +82,7 @@ App.Helpers = {
 				  var lng = results[0].geometry.location.Pa;
 					  
 				  var latlng =  "lat=" + lat + "&lng=" + lng;
-				  App.insta.settings.latlng = latlng;
+				  App.settings.latlng = latlng;
 				  App.Main.display("locations");
 	
 			  } else {
@@ -99,7 +101,7 @@ App.Helpers = {
 			  if (status == google.maps.GeocoderStatus.OK) {
 				  var address = results[0].formatted_address;
 				  
-				    App.insta.settings.address = address;
+				    App.settings.address = address;
 					App.views.mediadetail.render(); // render the media detail view again once address data is ready
 	
 			  } else {
@@ -110,5 +112,3 @@ App.Helpers = {
 	}
 
 };
-
-})(jQuery);

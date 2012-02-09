@@ -180,7 +180,7 @@ App.Views.MediaDetail = Backbone.View.extend({
 				App.Helpers.reverseGeo(this.model.location);
 				}
 			} else {
-				App.insta.settings.address = null;	
+				App.settings.address = null;	
 			}
 			this.render();
 					 

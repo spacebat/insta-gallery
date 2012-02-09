@@ -1,4 +1,3 @@
-(function($){
 
 // JavaScript Document/* routers */
 App.Routers.Routes = Backbone.Router.extend({
@@ -12,57 +11,79 @@ App.Routers.Routes = Backbone.Router.extend({
 			'/feed/' : 'feed',
 			'/tagsearch/:id': 'tagsearch',
 			'/usersearch/:id': 'usersearch',
-			'/locationsearch/:id': 'locationsearch'			
+			'/locationsearch/:id': 'locationsearch'	,
+			'/myliked/': 'liked'			
 		},
 		
-		
 		home: function() {
-			App.insta.render();
-			console.log("home");
+			if (App.insta.render()) { // returns true if user is logged in.
+				App.router.navigate("/feed/", {trigger: true});
+			} else {
+				App.Main.display("media/popular");
+				App.router.navigate("/popular/", {trigger: false});	
+			}
+			
 		},
 		
 		auth: function(id) {
-			console.log("auth");
+			console.log("auth route" + id);
 			var access_token = App.Helpers.getaccessToken(id);
 			App.Helpers.createCookie('access_token',access_token,14);
-			App.insta.settings.accesstoken = access_token;
-			App.insta.render();	
+			App.insta.cookiecheck();
+			if (App.insta.render()){
+				App.Main.display("users/self/feed");
+				App.router.navigate("/feed/", {trigger: false});	
+			}
 		},
 		
 		mediadetail: function(id) {
-			console.log("media detail for photo: " + id);
+			App.insta.render();
 			App.Main.display("media" , id);
 		},
 		
 		userdetail: function(id) {
-			console.log("user detail for photo: " + id);
-			App.Main.display("users",null,id);
+			if (App.insta.render()){
+				App.Main.display("users",null,id);
+			}
+			
 		},
 		
 		myphotos: function(){
-			App.Main.display("users/self/media/recent/");
+			if (App.insta.render()){
+				App.Main.display("users/self/media/recent/");
+			}
 		},
 		
 		popular: function(){
-			App.Main.display("media/popular");	
+			if (App.insta.render()){
+				App.Main.display("media/popular");
+			}
 		},
 		
 		feed: function() {
-			App.Main.display("users/self/feed");
+			if (App.insta.render()) {  // returns true if user is logged in.
+				App.Main.display("users/self/feed");
+			}
 		},
 		
 		tagsearch: function(id) {
-			App.Main.display("tags", null, null, id);	
+			if (App.insta.render()) {  // returns true if user is logged in.
+				App.Main.display("tags", null, null, id);
+			}
 		},
 		
 		usersearch: function(id){
-			App.Main.display("users/search" , null, null, id);
+				if (App.insta.render()) {  // returns true if user is logged in.
+					App.Main.display("users/search" , null, null, id);
+				}
 		},
-		locationsearch: function(id){
-			console.log("location search" + id);
-			// App.Main.display("locations", null, null, id);
+		
+		liked: function(){
+			if (App.insta.render()){;
+				App.Main.display("users/self/media/liked");
+			}
+			
 		}
 	})
 
-
-})(jQuery);
+App.router = new App.Routers.Routes();

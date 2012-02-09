@@ -8,10 +8,10 @@ App.Collections.Users = Backbone.Collection.extend({
     },
     url: function() {
 
-		if (App.insta.settings.accesstoken) {				
-			this.token = "access_token=" + App.insta.settings.accesstoken;	
+		if (App.settings.accesstoken) {				
+			this.token = "access_token=" + App.settings.accesstoken;	
 		} else {
-			this.token = "client_id=" + App.insta.settings.clientid; // un-auth'ed query
+			this.token = "client_id=" + App.settings.clientid; // un-auth'ed query
 		}
 		 
         var request = "https://api.instagram.com/v1/" + this.query + this.token + "&callback=?";	

@@ -13,9 +13,6 @@ App.Views.MenuAuth = Backbone.View.extend({ // perhaps bind this to a new menu m
 	},
 	events: { // using routes rather than events for the web app - 
 		"click #logout" : "logout",
-		// "click #popularLink"  : "popular",
-		// "click #feedLink"  : "feed",
-		// "click #meLink"  : "myphotos",
 		"click #searchButton" : "search",
 	},
 	
@@ -32,21 +29,17 @@ App.Views.MenuAuth = Backbone.View.extend({ // perhaps bind this to a new menu m
 		App.Main.display("users/self/feed");	
 	},
 	
-	search_user: function(){ // now in router
-	},
-	
-	
 	search: function(e){
 		var $checked = $("input[name='searchtype']:checked")
 		var searchfor = $checked.val();
 		var query = $("#search").val();
 		switch(searchfor) {
 			case "tag":
-			App.insta.router.navigate("/tagsearch/" + query, {trigger: true});
+			App.router.navigate("/tagsearch/" + query, {trigger: true});
 			break;
 			
 			case "user":
-			App.insta.router.navigate("/usersearch/" + query, {trigger: true});
+			App.router.navigate("/usersearch/" + query, {trigger: true});
 			break;
 			
 			case "location":
@@ -56,11 +49,6 @@ App.Views.MenuAuth = Backbone.View.extend({ // perhaps bind this to a new menu m
 		}
 	},
 	
-	search_tag: function(e){ // replaced by route
-		var query = $("#search").val();
-		App.insta.settings.tags = query;
-		App.Main.display("tags", null, null , query);	
-	},
 	
 	popular: function(){
 		App.Main.display("media/popular");
@@ -69,8 +57,8 @@ App.Views.MenuAuth = Backbone.View.extend({ // perhaps bind this to a new menu m
 	
 	logout: function(){
 		App.Helpers.eraseCookie('access_token');
-		App.insta.settings.accesstoken = null;
-		window.location = "http://www.insta.mungopod.com";
+		App.settings.accesstoken = null;
+		window.location = "http://localhost/~ptutty/insta-gallery/";
 		return false;
 	}
 })
